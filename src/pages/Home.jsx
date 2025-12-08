@@ -14,29 +14,32 @@ const Home = () => {
       delete: null
     }
   }
+  const [books, setBooks] = useState([])
+  const [selectedBook, setSelectedBook] = useState(null)
 
-  const [products, setProducts] = useState([])
-  const [selectedProduct, setSelectedProduct] = useState(null)
+
   const [filters, setFilters] = useState({
     name: "",
     stock: 0,
     category: "",
     minPrice: 0,
-    maxPrice: 0
+    maxPrice: 0,
+    author: ""
+
   })
   const [responseServer, setResponseServer] = useState(initialErrorState)
 
   // { id: '6925fe9645e9b029b62ac797', iat: 1764101665, exp: 1764105265 }
   const { user, token } = useAuth()
 
-  const fetchingProducts = async (query = "") => {
+  const fetchingBooks = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const response = await fetch(`http://localhost:3000/products?${query}`, {
+      const response = await fetch(`http://localhost:3000/books?${query}`, {
         method: "GET"
       })
-      const dataProducts = await response.json()
-      setProducts(dataProducts.data.reverse())
+      const dataBooks = await response.json()
+      setBooks(dataBooks.data.reverse())
       setResponseServer({
         success: true,
         notification: "Exito al cargar los productos",
@@ -58,16 +61,16 @@ const Home = () => {
   }
 
   useEffect(() => {
-    fetchingProducts()
+    fetchingBooks()
   }, [])
 
-  const deleteProduct = async (idProduct) => {
+  const deleteBook = async (idBook) => {
     if (!confirm("Esta seguro de que quieres borrar el producto")) {
       return
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/products/${idProduct}`, {
+      const response = await fetch(`http://localhost:3000/books/${idBook}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`
@@ -80,7 +83,7 @@ const Home = () => {
         return
       }
 
-      setProducts(products.filter((p) => p._id !== idProduct))
+      setBooks(books.filter((p) => p._id !== idBook))
 
       alert(`${dataResponse.data.name} borrado con éxito.`)
     } catch (error) {
@@ -88,8 +91,8 @@ const Home = () => {
     }
   }
 
-  const handleUpdateProduct = (p) => {
-    setSelectedProduct(p)
+  const handleUpdateBook = (p) => {
+    setSelectedBook(p)
   }
 
   const handleChange = (e) => {
@@ -109,6 +112,7 @@ const Home = () => {
     if (filters.category) query.append("category", filters.category)
     if (filters.minPrice) query.append("minPrice", filters.minPrice)
     if (filters.maxPrice) query.append("maxPrice", filters.maxPrice)
+      if (filters.author) query.append("author", filters.author)
 
     fetchingProducts(query.toString())
   }
@@ -119,18 +123,18 @@ const Home = () => {
       stock: 0,
       category: "",
       minPrice: 0,
-      maxPrice: 0
+      maxPrice: 0,
+      author: ""
     })
   }
 
   return (
     <Layout>
-      <div className="page-banner">Nuestros Productos</div>
+      <div className="page-banner">Nuestros Libros</div>
 
       <section className="page-section">
         <p>
-          Bienvenido {user && user.id} a nuestra tienda. Aquí encontrarás una amplia variedad de productos diseñados para satisfacer
-          tus necesidades. Nuestro compromiso es ofrecer calidad y confianza.
+          Bienvenido {user && user.id} a nuestra tienda. Aquí encontrarás una amplia variedad de libros. Nuestro compromiso es ofrecer calidad y confianza.
         </p>
       </section>
 
@@ -149,6 +153,13 @@ const Home = () => {
             placeholder="Ingrese el stock"
             onChange={handleChange}
             value={filters.stock}
+          />
+           <input
+            type="string"
+            name="author"
+            placeholder="nombre del autor"
+            onChange={handleChange}
+            value={filters.author}
           />
           <select
             name="category"
@@ -178,32 +189,34 @@ const Home = () => {
             onChange={handleChange}
             value={filters.maxPrice}
           />
+          
           <button type="submit">Aplicar filtros</button>
           <button type="button" onClick={handleResetFilters}>Cancelar</button>
         </form>
       </section>
 
       {
-        selectedProduct &&
-        <UpdateProduct
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onUpdate={fetchingProducts}
+        selectedBook &&
+        <UpdateBook
+          product={selectedBook}
+          onClose={() => setSelectedBook(null)}
+          onUpdate={fetchingBooks}
         />
       }
 
       <section className="products-grid">
-        {products.map((p, i) => (
+        {books.map((p, i) => (
           <div key={i} className="product-card">
             <h3>{p.name}</h3>
             <p>{p.description}</p>
             <p><strong>Precio:</strong> ${p.price}</p>
             <p><strong>Stock:</strong> {p.stock}</p>
             <p><strong>Categoría:</strong> {p.category}</p>
+            <p><strong>Autor:</strong> {p.author}</p>
             {
               user && <div className="cont-btn">
-                <button onClick={() => handleUpdateProduct(p)}>Actualizar</button>
-                <button onClick={() => deleteProduct(p._id)}>Borrar</button>
+                <button onClick={() => handleUpdateBook(p)}>Actualizar</button>
+                <button onClick={() => deleteBook(p._id)}>Borrar</button>
               </div>
             }
           </div>

@@ -9,7 +9,8 @@ const AddProduct = () => {
     description: "",
     price: "",
     stock: "",
-    category: ""
+    category: "",
+    author:""
   })
 
   const navigate = useNavigate()
@@ -28,7 +29,7 @@ const AddProduct = () => {
     console.log(token)
 
     try {
-      const response = await fetch(`http://localhost:3000/products`, {
+      const response = await fetch(`http://localhost:3000/books`, { //ACA CAMBIE EL ENDPOINT
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +49,8 @@ const AddProduct = () => {
         description: "",
         price: "",
         stock: "",
-        category: ""
+        category: "",
+        author:""
       })
       navigate("/")
     } catch (error) {
@@ -63,7 +65,7 @@ const AddProduct = () => {
 
   return (
     <Layout>
-      <div className="page-banner">Agregar Nuevo Producto</div>
+      <div className="page-banner">Agregar Nuevo Libro</div>
 
       <section className="page-section">
         <form className="form-container"
@@ -111,6 +113,15 @@ const AddProduct = () => {
             maxLength={20}
             onChange={(e) => handleChange(e)}
             value={formData.category}
+          />
+           <input
+            type="text"
+            placeholder="Author"
+            name="author"
+            minLength={3}
+            maxLength={20}
+            onChange={(e) => handleChange(e)}
+            value={formData.author}
           />
           <button type="submit">Agregar</button>
         </form>
