@@ -1,14 +1,15 @@
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
 
-const UpdateProduct = ({ product, onClose, onUpdate }) => {
+const UpdateProduct = ({ book, onClose, onUpdate }) => {
   const [loader, setLoader] = useState(false)
   const [formData, setFormData] = useState({
-    name: product.name,
-    description: product.description,
-    stock: Number(product.stock),
-    price: Number(product.price),
-    category: product.category
+    name: book.name,
+    description: book.description,
+    stock: Number(book.stock),
+    price: Number(book.price),
+    category: book.category,
+    author: book.author
   })
 
   const { token } = useAuth()
@@ -31,7 +32,7 @@ const UpdateProduct = ({ product, onClose, onUpdate }) => {
 
     try {
       setLoader(true)
-      const response = await fetch(`http://localhost:3000/products/${product._id}`, {
+      const response = await fetch(`http://localhost:3000/books/${book._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +53,7 @@ const UpdateProduct = ({ product, onClose, onUpdate }) => {
   return (
     <section className="modal-overlay">
       <div className="modal-box">
-        <h2>Editar producto</h2>
+        <h2>Editar libro</h2>
         <form className="form-container" onSubmit={handleSubmit}>
           <input
             name="name"
@@ -82,6 +83,12 @@ const UpdateProduct = ({ product, onClose, onUpdate }) => {
             name="category"
             type="text"
             value={formData.category}
+            onChange={handleChange}
+          />
+          <input
+            name="author"
+            type="text"
+            value={formData.author}
             onChange={handleChange}
           />
           <button type="submit">{loader ? "Enviando..." : "Enviar"}</button>
