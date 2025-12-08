@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
     <>
       <header className="layout-header">
         <nav className="layout-nav">
-          <Link to="/">Nuestros productos</Link>
+          <Link to="/">Nuestros libros</Link>
           <Link to="/sobre-nosotros">Sobre nosotros</Link>
           <Link to="/contacto">Contactanos</Link>
           {
@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
               </>
               :
               <>
-                <Link to="/agregar-producto">Agregar producto</Link>
+                <Link to="/agregar-producto">Agregar libro</Link>
                 <button onClick={handleLogout}>Cerrar sesión</button>
               </>
           }
