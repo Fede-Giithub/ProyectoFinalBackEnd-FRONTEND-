@@ -8,13 +8,14 @@ const AboutUs = () => {
       <section className="page-section">
         <h2>Nuestra Historia</h2>
         <p>
-          Somos una compañía dedicada a ofrecer productos de alta calidad. Creemos en la innovación y la mejora
-          constante, manteniendo siempre el compromiso con nuestros clientes.
+          Somos una librería apasionada por el mundo de los libros y el conocimiento. 
+          Desde nuestros inicios, trabajamos para acercar historias, ideas y experiencias 
+          a lectores de todas las edades.
         </p>
 
         <h2>Misión</h2>
         <p>
-          Ofrecer soluciones confiables que mejoren la vida cotidiana de las personas.
+         Promover la lectura y la cultura, brindando un espacio donde lectores
         </p>
 
         <h2>Visión</h2>
