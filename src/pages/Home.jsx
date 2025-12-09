@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Layout from "../components/Layout"
-import UpdateProduct from "../components/UpdateProduct"
+import UpdateBook from "../components/UpdateProduct"
 import { useAuth } from "../context/AuthContext"
 import { CATEGORIES } from "../constants/categories.js"
 import { ToastMessage } from "../components/ToastMessage.jsx"
@@ -114,7 +114,7 @@ const Home = () => {
     if (filters.maxPrice) query.append("maxPrice", filters.maxPrice)
       if (filters.author) query.append("author", filters.author)
 
-    fetchingProducts(query.toString())
+    fetchingBooks(query.toString())
   }
 
   const handleResetFilters = () => {
@@ -166,7 +166,7 @@ const Home = () => {
             onChange={handleChange}
             value={filters.category}
           >
-            <option defaultValue>Todas las categorias</option>
+            <option value="">Todas las categorias</option>
             {
               CATEGORIES.map((category) =>
                 <option key={category.id}
@@ -198,7 +198,7 @@ const Home = () => {
       {
         selectedBook &&
         <UpdateBook
-          product={selectedBook}
+          book={selectedBook}
           onClose={() => setSelectedBook(null)}
           onUpdate={fetchingBooks}
         />

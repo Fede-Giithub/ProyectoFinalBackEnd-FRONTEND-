@@ -4,10 +4,10 @@ const CATEGORIES = [
   { id: 3, value: "fantasia", content: "Fantasia" },
   { id: 4, value: "terror", content: "Terror" },
   { id: 5, value: "realista", content: "Realista" },
-  { id: 6, value: "deportes", content: "Romance" },
-  { id: 7, value: "hogar", content: "Historico" },
-  { id: 8, value: "muebles", content: "Aventura" },
-  { id: 9, value: "juguetes", content: "Drama" }
+  { id: 6, value: "romance", content: "Romance" },
+  { id: 7, value: "historico", content: "Historico" },
+  { id: 8, value: "aventura", content: "Aventura" },
+  { id: 9, value: "drama", content: "Drama" }
 ]
 
 export { CATEGORIES }

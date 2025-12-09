@@ -109,7 +109,7 @@ const AddProduct = () => {
             type="text"
             placeholder="Categoría"
             name="category"
-            minLength={3}
+            minLength={2}
             maxLength={20}
             onChange={(e) => handleChange(e)}
             value={formData.category}

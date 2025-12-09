@@ -1,7 +1,10 @@
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
 
-const UpdateProduct = ({ book, onClose, onUpdate }) => {
+const UpdateBook = ({ book, onClose, onUpdate }) => {
+
+  if (!book) return <p>Cargando libro...</p>;
+
   const [loader, setLoader] = useState(false)
   const [formData, setFormData] = useState({
     name: book.name,
@@ -99,4 +102,4 @@ const UpdateProduct = ({ book, onClose, onUpdate }) => {
   )
 }
 
-export default UpdateProduct
+export default UpdateBook
