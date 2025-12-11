@@ -2,6 +2,7 @@ import { useState } from "react"
 import Layout from "../components/Layout"
 import { useAuth } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { URLBACKEND } from "../constants";
 
 const AddProduct = () => {
   const [formData, setFormData] = useState({

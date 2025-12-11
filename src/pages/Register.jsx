@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Layout from "../components/Layout"
-
+import { URLBACKEND } from "../constants";
 const Register = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -20,7 +20,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch(`${URLBACKEND}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
