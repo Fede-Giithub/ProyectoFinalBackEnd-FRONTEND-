@@ -35,7 +35,7 @@ const Home = () => {
   const fetchingBooks = async (query = "") => {
     setResponseServer(initialErrorState)
     try {
-      const response = await fetch(`http://localhost:3000/books?${query}`, {
+      const response = await fetch(`${URLBACKEND}/books?${query}`, {
         method: "GET"
       })
       const dataBooks = await response.json()
@@ -70,7 +70,7 @@ const Home = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/books/${idBook}`, {
+      const response = await fetch(`${URLBACKEND}/books/${idBook}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`

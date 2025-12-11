@@ -29,7 +29,7 @@ const AddProduct = () => {
     console.log(token)
 
     try {
-      const response = await fetch(`http://localhost:3000/books`, { //ACA CAMBIE EL ENDPOINT
+      const response = await fetch(`${URLBACKEND}/books`, { //ACA CAMBIE EL ENDPOINT
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "../context/AuthContext"
+import { URLBACKEND } from "../constants";
+
 
 const UpdateBook = ({ book, onClose, onUpdate }) => {
 
@@ -35,7 +37,7 @@ const UpdateBook = ({ book, onClose, onUpdate }) => {
 
     try {
       setLoader(true)
-      const response = await fetch(`http://localhost:3000/books/${book._id}`, {
+      const response = await fetch(`${URLBACKEND}/books/${book._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
